@@ -1,0 +1,91 @@
+wii-key Y 0.3
+key-press W
+
+wii-key Y -0.3
+key-press S
+
+wii-key X 0.3
+key-press D
+
+wii-key X -0.3
+key-press A
+
+wii-key Z
+key-press SPACE
+
+wii-key C
+key-press CTRL
+
+wii-key RIGHT
+mouse-wheel VERTICAL -1
+
+wii-key B
+mouse-click LEFT NORMAL
+
+wii-key DOWN
+mouse-wheel VERTICAL 1
+
+wii-key UP
+key-press E
+
+wii-key A
+recenter-ir
+
+key-press f
+
+wii-key 1
+key-press O
+
+wii-key 2
+recenter-ir
+
+--long-motion WIIMOTE Y 0.9 400 ONCE
+--recenter-ir
+
+flick-motion WIIMOTE Y 1
+key-press R
+
+flick-motion NUNCHUK Z 1
+long-key-press 1000 L
+
+long-motion NUNCHUK X -0.8 300 ONCE
+mouse-wheel VERTICAL -1
+
+--long-motion NUNCHUK X -0.8 500 ONCE
+--mouse-wheel VERTICAL 1
+
+
+
+--key-press f
+
+
+
+
+
+
+
+--wii-key 1
+--key-press h
+
+--wii-key 2
+--key-press j
+
+--wii-key A
+--mouse-click RIGHT NORMAL
+
+--wii-key 1
+--mouse-wheel VERTICAL 1
+
+--wii-key 2
+--mouse-wheel VERTICAL -1
+
+--flick-motion NUNCHUK X 1
+--mouse-wheel VERTICAL -1
+
+--flick-motion NUNCHUK X -1
+--mouse-wheel VERTICAL 1
+
+
+
+
+

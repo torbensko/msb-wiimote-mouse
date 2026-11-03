@@ -1,0 +1,39 @@
+A sample configuration file. It must comply to the following rules:
+	
+2. The contents of this file must follow the specified format:
+
+- wiimote-action
+- windows-action
+
+- wiimote-action = 
+- 	flick-motion (WIIMOTE | NUNCHUCK) (X | Y | Z) threshold |
+-       long-motion (WIIMOTE | NUNCHUCK) (X | Y | Z) threshold duration_in_milli [ONCE] |
+- 	wii-key key [threshold]
+
+flick-motion works on a difference of one polling to the next (force acceleration)
+long-motion works on exceeding a threshold (force velocity)
+
+- windows-action =
+- 	key-press key1 key2 ... |
+-       long-key-press duration_in_milli key1 key2 ... |
+- 	mouse-click (LEFT | RIGHT | MIDDLE) (NORMAL | SINGLE_CLICK | DOUBLE_CLICK) |
+- 	wheel-scroll (VERTICAL | HORIZONTAL) increments
+-       recenter-ir
+
+
+      ---     -Y
+     | + |     ^
+     | * |     |
+     |...|     |
+     |   |     |
+     | : |      -----> +X
+      ---
+
+              +Z
+               ^
+ __________    |
+|__        |   |
+   \_______|   |
+                -----> +Y
+
+

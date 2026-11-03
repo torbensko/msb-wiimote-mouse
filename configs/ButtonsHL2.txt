@@ -1,0 +1,52 @@
+wii-key Y 0.3
+key-press W
+
+wii-key Y -0.3
+key-press S
+
+wii-key X 0.3
+key-press D
+
+wii-key X -0.3
+key-press A
+
+wii-key Z
+key-press SPACE
+
+wii-key C
+key-press CTRL
+
+originally 2
+
+flick-motion NUNCHUK Z 1
+long-key-press 1000 L
+
+wii-key DOWN
+key-press E
+
+wii-key 1
+key-press h
+
+wii-key 2
+key-press j
+
+wii-key A
+recenter-ir
+
+wii-key B
+mouse-click RIGHT NORMAL
+
+flick-motion WIIMOTE Y 1
+key-press R
+
+wii-key RIGHT
+mouse-wheel VERTICAL -1
+
+wii-key LEFT
+mouse-wheel VERTICAL 1
+
+
+
+
+
+

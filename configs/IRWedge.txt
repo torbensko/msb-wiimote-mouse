@@ -1,0 +1,81 @@
+A sample configuration file. It must comply to the following rules:
+
+1. The values are used as ratios, so actual values are not important.
+	In general, use meters.
+	
+2. All values must be on their own line immediately following a 
+   recognised label.
+   
+3. All labels must have no white-space on the same line.
+
+4. The point of origin is the bottom-left corner of the screen.
+
+5. The screen size must be provided before any of the dots.
+
+6. The dots must be ordered left to right, in relation to the order
+   in which they are specified.
+
+7. Dots that are expected to be grouped must be:
+
+   7.1   next to each other.
+      
+   7.2   have a smaller separation than between them than any other
+         dots that are not expected to be grouped.
+         
+8. Dots should not be arranged vertically unless they are expected
+   to be grouped.
+   
+9. To avoid supplying a value for max-groups, either use 0 or exclude
+   the line.
+
+max-grouping-size
+2
+
+max-groups
+5
+
+screen-width-height
+60
+20
+
+dot-x-y
+9
+8.3
+
+dot-x-y
+9
+11.8
+
+dot-x-y
+17
+8.3
+
+dot-x-y
+17
+11.8
+
+dot-x-y
+30
+8.3
+
+dot-x-y
+30
+11.8
+
+dot-x-y
+43
+8.3
+
+dot-x-y
+43
+11.8
+
+dot-x-y
+51
+8.3
+
+dot-x-y
+51
+11.8
+
+
