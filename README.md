@@ -47,13 +47,9 @@ The application runs in the system tray. From its menu:
 
 ## Known issues
 
-- An exception in the tracking code ends the application, because it runs on WiimoteLib's read thread.
-- Loading a second IR configuration while running carries over the previous model and settings, and can crash the tracking code.
-- When only one dot of a horizontal bar is visible, the dot is assigned using the camera's height rather than its width.
-- `max-groups 0` limits the configuration to a single bar, rather than meaning no limit as `IR.txt` describes.
-- `Buttons.txt` documents the scroll action as `wheel-scroll`; the parser expects `mouse-wheel`.
 - Dots are grouped in screen pixels, so the layout's proportions are stretched to the primary screen's. On a screen much narrower than the layout, neighbouring bars can end up closer than the two dots of one bar and be paired wrongly. `IRWedge.txt` suits a wide, multi-projector desktop.
 - The model drifts by a bar from time to time and needs recentering. In logs from the Wedge, about half the recenter presses corrected the model by one or two bars.
+- An error in the tracking code is written to the log next to the executable, and the model starts afresh, which can cause a brief jump of the cursor.
 
 ## Publications
 

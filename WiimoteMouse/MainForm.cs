@@ -121,7 +121,7 @@ namespace WiimoteMouse
         // variables for computing the cursor position
         IRState irData;
         int maxGroupingSize = 2;
-        int maxGroups = 1;
+        int maxGroups = 0; // 0 for no limit
         int screenWidth;
         int screenHeight;
         StaticEnvironment env;
@@ -465,14 +465,16 @@ namespace WiimoteMouse
 
         void wm_OnWiimoteChanged(object sender, WiimoteChangedEventArgs args)
         {
+            if (inCritical)
+                return;
 
-            if (!inCritical)
+            m.WaitOne();
+            inCritical = true;
+            try
             {
-                m.WaitOne();
                 wiimoteTimeoutTimer.Stop();
                 wiimoteTimeoutTimer.Start();
 
-                inCritical = true;
                 float batteryLevel = (((100.0f * 48.0f * (float)(args.WiimoteState.Battery / 48.0f))) / 192.0f);
                 BeginInvoke((MethodInvoker)delegate() { batteryMenuItem.Text = BATTERY_TEXT + batteryLevel.ToString("F") + "%"; });
                 BeginInvoke((MethodInvoker)delegate() { extensionMenuItem.Text = EXTENSION_TEXT + args.WiimoteState.ExtensionType.ToString(); });
@@ -1039,9 +1041,40 @@ namespace WiimoteMouse
                 returnedBottom = false;
 
                 Invalidate();
+            }
+            catch (Exception ex)
+            {
+                // This runs on WiimoteLib's read thread, where an unhandled
+                // exception would end the application. Log it and start the
+                // model afresh from the next report instead.
+                writeToLog("Error: " + ex);
+                resetModel();
+            }
+            finally
+            {
                 inCritical = false;
                 m.ReleaseMutex();
             }
+        }
+
+        /**
+         * Forgets what the tracking model has learnt, so the dots in view are
+         * treated as new on the next report.
+         */
+        private void resetModel()
+        {
+            irData = new IRState();
+            dot1 = new GroupableDot();
+            dot2 = new GroupableDot();
+            dot3 = new GroupableDot();
+            dot4 = new GroupableDot();
+            latestDotGrouping = null;
+            currentDotGrouping = new List<DotGroup>();
+            dotMapping = new List<DotMatch>();
+            cursors = new List<CursorLocation>();
+            envOffset = 0;
+            previouslyVisible = 0;
+            recoverable = false;
         }
 
         private bool onTheBottom(GroupableDot dot)
@@ -1066,7 +1099,7 @@ namespace WiimoteMouse
 
         private bool matches(int offset)
         {
-            if ((envOffset - offset) >= 0 && (currentDotGrouping.Count + envOffset + offset) <= env.Count)
+            if ((envOffset + offset) >= 0 && (currentDotGrouping.Count + envOffset + offset) <= env.Count)
             {
                 bool match = true;
                 for (int i = 0; i < currentDotGrouping.Count; i++)
@@ -1232,7 +1265,16 @@ namespace WiimoteMouse
         {
             try
             {
-                initiateLogic(this.loadIRConfigWindow.FileName);
+                m.WaitOne();
+                try
+                {
+                    initiateLogic(this.loadIRConfigWindow.FileName);
+                    resetModel();
+                }
+                finally
+                {
+                    m.ReleaseMutex();
+                }
                 irFilePath = this.loadIRConfigWindow.FileName;
                 String irMenu = "IR: " + getFileName(this.loadIRConfigWindow.FileName) + "...";
                 BeginInvoke((MethodInvoker)delegate() { this.loadIRConfigurationMenuItem.Text = irMenu; });
@@ -1251,6 +1293,13 @@ namespace WiimoteMouse
             int lineNumber = 0;
             float width = 0;
             float height = 0;
+
+            // settings not given in this file revert to their defaults
+            maxGroupingSize = 2;
+            maxGroups = 0;
+            fixedScale = false;
+            scaleX = 0;
+            scaleY = 0;
 
             FileStream file = new FileStream(filename, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(file);
@@ -1456,7 +1505,7 @@ namespace WiimoteMouse
             while(
                 dotPairs.Count > 0 && 
                 (dotPairs[0].dot1.newGrouping.Count + dotPairs[0].dot2.newGrouping.Count) <= maxGroupingSize &&
-                groups <= maxGroups &&
+                (maxGroups <= 0 || groups < maxGroups) &&
                 !done)
             {
                 bool vertical = BasicDot.areVertical(dotPairs[0].dot1, dotPairs[0].dot2);
@@ -2292,7 +2341,7 @@ namespace WiimoteMouse
                 {
                     DotMatch match = new DotMatch();
                     match.irDot = group[0];
-                    if (group[0].x < (MainForm.WII_HEIGHT / 2))
+                    if (group[0].x < (MainForm.WII_WIDTH / 2))
                         match.screenDot = rightDot;
                     else
                         match.screenDot = leftDot;

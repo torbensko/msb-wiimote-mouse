@@ -17,7 +17,7 @@ long-motion works on exceeding a threshold (force velocity)
 - 	key-press key1 key2 ... |
 -       long-key-press duration_in_milli key1 key2 ... |
 - 	mouse-click (LEFT | RIGHT | MIDDLE) (NORMAL | SINGLE_CLICK | DOUBLE_CLICK) |
-- 	wheel-scroll (VERTICAL | HORIZONTAL) increments
+- 	mouse-wheel (VERTICAL | HORIZONTAL) increments
 -       recenter-ir
 
 
