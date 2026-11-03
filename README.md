@@ -1,3 +1,5 @@
+<img src="logo.png" alt="" width="128" align="right">
+
 # MSB Wiimote Mouse
 
 > **Provided for historical purposes.** This is the code as it was used between 2008 and 2010, kept for reference and research. It is not maintained, no binary is provided, and it hasn't been run on current Windows or hardware.
