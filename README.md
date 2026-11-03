@@ -1,8 +1,10 @@
 # MSB Wiimote Mouse
 
+> **Provided for historical purposes.** This is the code as it was used between 2008 and 2010, kept for reference and research. It is not maintained, no binary is provided, and it hasn't been run on current Windows or hardware.
+
 Lets a Wii Remote aim across several sensor bars, so one controller can cover a wide, surround display. The Wiimote and Nunchuk drive the Windows mouse and keyboard, with every control mapped in a script.
 
-It was written in 2007–2008 for an honours project at the Australian National University that ran Half-Life 2 in the Wedge, a two-walled virtual reality theatre, with five sensor bars spread around its screens. It is archived here as legacy software and is no longer maintained.
+It was written in 2007–2008 for an honours project at the Australian National University that ran Half-Life 2 in the Wedge, a two-walled virtual reality theatre, with five sensor bars spread around its screens. The approach and its user testing are described in [The Wiimote with multiple sensor bars](https://doi.org/10.1145/1577782.1577790) (Sko and Gardner, CHINZ 2009).
 
 ## How it works
 
@@ -55,9 +57,17 @@ The application runs in the system tray. From its menu:
 
 - T. Schou and H. J. Gardner. [A Wii remote, a game engine, five sensor bars and a virtual reality theatre](https://dl.acm.org/doi/abs/10.1145/1324892.1324941). OZCHI 2007.
 - T. Schou and H. J. Gardner. A surround interface using the Wii controller with multiple sensor bars. VRST 2008 workshop.
-- T. Sko and H. J. Gardner. The Wiimote with multiple sensor bars: creating an affordable, virtual reality controller. NZCHI 2009.
+- T. Sko and H. J. Gardner. [The Wiimote with multiple sensor bars: creating an affordable, virtual reality controller](https://doi.org/10.1145/1577782.1577790). CHINZ 2009.
 - C. Pelling, T. Sko and H. J. Gardner. [Be careful how you point that thing: Wiimote aiming for large displays](https://dl.acm.org/doi/abs/10.1145/1738826.1738908). OZCHI 2009.
 
-## Credits
+## Citing
 
-WiimoteLib is by [Brian Peek](https://github.com/BrianPeek/WiimoteLib). Version 1.1 shipped without a licence file; its original headers and readme are kept.
+If this work is useful in your research, please cite:
+
+> T. Sko and H. J. Gardner. 2009. The Wiimote with multiple sensor bars: creating an affordable, virtual reality controller. In *Proceedings of the 10th International Conference of the NZ Chapter of the ACM's Special Interest Group on Human-Computer Interaction (CHINZ '09)*, 41–44. https://doi.org/10.1145/1577782.1577790
+
+## Licence
+
+The project's own code and configurations are released under the [MIT licence](LICENSE).
+
+`WiimoteLib/` and `WiimoteTest/` are Brian Peek's [Managed Library for Nintendo's Wiimote](https://github.com/BrianPeek/WiimoteLib) and its test application, and aren't covered by this licence. Version 1.1 shipped without a licence file; its original headers and readme are kept.
